@@ -1,0 +1,11 @@
+install_keymaps() {
+    echo ""
+    echo "🔧 Setting up IntelliJ IDEA keymap..."
+    install_symlink "$HOME/managed/IdeaKeymapMacOS.xml" "$HOME/Library/Application Support/JetBrains/IntelliJIdea2024.3/keymaps/IdeaKeymapMacOS.xml"
+}
+
+uninstall_keymaps() {
+    echo ""
+    echo "🔧 Removing IntelliJ IDEA keymap..."
+    uninstall_symlink "$HOME/managed/IdeaKeymapMacOS.xml" "$HOME/Library/Application Support/JetBrains/IntelliJIdea2024.3/keymaps/IdeaKeymapMacOS.xml"
+}
