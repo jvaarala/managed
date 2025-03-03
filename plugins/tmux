@@ -28,7 +28,7 @@ install_tmux() {
   echo "📺 Installing tmux..."
   install_repositories "${CSV_REPOS[*]}"
   install_brew_packages "${CSV_BREW[*]}"
-  install_symlink "$HOME/managed.tmux.conf" "$HOME/.tmux.conf"
+  install_symlink "$HOME/managed/.tmux.conf" "$HOME/.tmux.conf"
 }
 
 uninstall_tmux() {
