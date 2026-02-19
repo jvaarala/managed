@@ -1,4 +1,4 @@
-source "./adapters/symlink"
+source "$SHCMANAGER_ADAPTERS_DIR/symlink"
 
 install_zshrc() {
   echo ""

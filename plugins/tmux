@@ -1,6 +1,6 @@
-source "./adapters/brew_package"
-source "./adapters/repository"
-source "./adapters/symlink"
+source "$SHCMANAGER_ADAPTERS_DIR/brew_package"
+source "$SHCMANAGER_ADAPTERS_DIR/repository"
+source "$SHCMANAGER_ADAPTERS_DIR/symlink"
 
 # "source|path"
 REPOS=(
