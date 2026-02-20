@@ -3,11 +3,11 @@ source "$SHCMANAGER_ADAPTERS_DIR/symlink"
 install_zshrc() {
   echo ""
   echo "🔧 Setting up .zshrc configuration..."
-  install_symlink "$HOME/managed/.zshrc" "$HOME/.zshrc"
+  install_symlink "$HOME/shcmanager/managed/.zshrc" "$HOME/.zshrc"
 }
 
 uninstall_zshrc() {
   echo ""
   echo "🗑️ Removing .zshrc configuration..."
-  uninstall_symlink "$HOME/managed/.zshrc" "$HOME/.zshrc"
+  uninstall_symlink "$HOME/shcmanager/managed/.zshrc" "$HOME/.zshrc"
 }
