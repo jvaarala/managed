@@ -1,0 +1,68 @@
+SCRIPT_DST="$HOME/.local/bin/killp"
+ZSHRC="$HOME/.zshrc"
+
+_resolve_path() {
+  local f="$1"
+  while [ -L "$f" ]; do
+    local link
+    link=$(readlink "$f")
+    [[ "$link" == /* ]] && f="$link" || f="$(dirname "$f")/$link"
+  done
+  echo "$f"
+}
+
+install_killp() {
+  echo ""
+  echo "🔧 Setting up killp..."
+
+  mkdir -p "$HOME/.local/bin"
+
+  cat > "$SCRIPT_DST" << 'EOF'
+#!/usr/bin/env bash
+port=$1
+
+if [[ -z "$port" ]]; then
+  echo "Usage: killp <port>"
+  exit 1
+fi
+
+pid=$(lsof -ti:"$port")
+
+if [[ -z "$pid" ]]; then
+  echo "No process found on port $port"
+  exit 0
+fi
+
+echo "Killing process $pid on port $port"
+kill -9 $pid
+EOF
+
+  chmod +x "$SCRIPT_DST"
+  echo "  ✅ script installed to $SCRIPT_DST"
+
+  if ! grep -qF "alias killp=" "$ZSHRC" 2>/dev/null; then
+    printf 'alias killp="%s"\n' "$SCRIPT_DST" >> "$ZSHRC"
+    echo "  ✅ added killp alias to $ZSHRC"
+  else
+    echo "  ℹ️  killp alias already present in $ZSHRC, skipping..."
+  fi
+}
+
+uninstall_killp() {
+  echo ""
+  echo "🗑️  Removing killp..."
+
+  if [ -f "$SCRIPT_DST" ]; then
+    rm "$SCRIPT_DST"
+    echo "  ✅ removed $SCRIPT_DST"
+  else
+    echo "  ℹ️  $SCRIPT_DST not found, skipping..."
+  fi
+
+  if grep -qF "alias killp=" "$ZSHRC" 2>/dev/null; then
+    sed -i '' "\|alias killp=\"$SCRIPT_DST\"|d" "$(_resolve_path "$ZSHRC")"
+    echo "  ✅ removed killp alias from $ZSHRC"
+  else
+    echo "  ℹ️  no killp alias found in $ZSHRC, skipping..."
+  fi
+}
