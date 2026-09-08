@@ -5,3 +5,6 @@ alias weekly="uv run --env-file /Users/jessevaarala/gitlab-weekly-summary/.env /
 
 . "$HOME/.local/bin/env"
 alias killp="/Users/jessevaarala/.local/bin/killp"
+
+export CONFLUENCE_TOKEN=$(cat /Users/jessevaarala/ruokavirasto/confluence_token)
+export PAIMEN_POSTMAN_ENVIRONMENT=$(cat /Users/jessevaarala/ruokavirasto/paimen_postman_environment.postman_environment.json)
